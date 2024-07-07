@@ -1,0 +1,95 @@
+/* body{
+    background-color: blueviolet;
+} */
+
+/* *{
+    background-color: black;
+} */
+
+/* h1, p{
+    color: red;
+} */
+
+/* .text{
+    color: red;
+} */
+
+/* #heading{
+    background-color: black;
+    color: white;
+    font-size: 100px;
+} */
+
+/* ul li{
+    color: blue;
+} */
+
+/* h1+p{
+    color: blueviolet;
+} */
+
+/* h1~p{
+ color: red ;
+} */
+/* .text{
+    color: red !important;
+    color: blue;
+} */
+
+/* body{
+    background-color: orange;
+} */
+
+/* *{
+    background-color: green;
+} */
+
+/* h1,p{
+    color: blue;
+}
+
+.text{
+    background-color: aqua;
+}
+
+#para{
+    color: green;
+} */
+
+/* ul > div > li{
+    color: blueviolet;
+} */
+
+/* ul li{
+    color: blueviolet;
+} */
+
+/* h1+p{
+    background-color: black;
+    color: white;
+} */
+
+/* h1~p{
+    background-color: black;
+    color: white
+} */
+
+/* COLOR NAME */
+h1{
+    background-color: rgba(183, 139, 56,0.4);
+    color: red;
+    /* opacity: 0.5; */
+}
+
+
+/* HEX CODE */
+h1+p{
+    color: #3b5998;
+}
+
+/* RGB COLOR */
+
+.para2{
+    background-color: rgb(39 205 88);
+}
+
