@@ -1,0 +1,83 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+HR+Lijeva:wght@100..400&display=swap');
+
+
+
+
+/* @font-face {
+    font-family: "Roboto";
+    src: url(fonts/Roboto-Regular.ttf);
+}
+@font-face {
+    font-family: "my font";
+    src: url(fonts/Roboto-Thin.ttf);
+} */
+
+/* body{
+    font-size: 16px;
+} */
+
+/* h1{ */
+    /* font-family: 'Courier New', Courier, monospace; */
+    /* font-family: "Playwrite HR Lijeva", cursive;
+    font-size: 200%; */
+    /* font-style: italic; */
+/* } */
+ /* h2{
+    font-family: "my font";
+} */
+/*
+h3{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+} */
+
+/* p{
+    font-weight: normal;
+    font-style: italic;
+} */
+
+.post > h1{
+    /* font-family: "Playwrite HR Lijeva", cursive; */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 200%;
+    /* text-indent: 20px; */
+    color: orange;
+   
+}
+
+.post > p{
+    font-weight: normal;
+    font-style: italic;
+    text-transform:capitalize;
+    /* line-height: 30px;
+    letter-spacing: 10px;
+    word-spacing: 30px; */
+    text-align: justify;
+    text-indent: 50px;
+
+}
+
+a{
+    text-decoration: none;
+}
+
+/* p::first-letter{
+    color: blue;
+} */
+p:first-line{
+    color: red;
+}
+
+a:visited{
+    color: red;
+}
+
+h1:hover{
+    text-shadow: 2px 2px 2px black;
+}
+input:focus{
+    background-color: green;
+}
+
+
+
