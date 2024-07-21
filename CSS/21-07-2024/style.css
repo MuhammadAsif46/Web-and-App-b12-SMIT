@@ -1,0 +1,74 @@
+body{
+    margin: 0px;
+}
+
+/* .red{
+    color: red;
+} */
+
+/* :root{
+    --color: red;
+    --bgcolor: purple;
+    --color1: #fff;
+}
+
+button{
+    background-color: var(--bgcolor);
+    color: var(--color1);
+}
+
+h1{
+    color: var(--color);
+} */
+
+.main {
+  background-color: orange;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  /* flex-direction: row; */
+  /* flex-wrap: wrap; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  /* align-content: flex-end; */
+  /* gap: 40px; */
+}
+
+.box1{
+    background-color: black;
+    width: 200px;
+    height: 200px;
+    /* border: 1px solid white; */
+    /* order: 2; */
+    /* flex: 1; */
+}
+
+.box2{
+    background-color: green;
+    width: 200px;
+    height: 200px;
+    /* border: 1px solid white; */
+    /* order: -1; */
+    /* flex: 2; */
+    align-self: flex-end;
+}
+.box3{
+    background-color: blue;
+    width: 200px;
+    height: 200px;
+    /* border: 1px solid white; */
+    /* order: 3; */
+}
+.box4{
+    background-color: purple;
+    width: 200px;
+    height: 200px;
+    /* border: 1px solid white; */
+}
+.box5{
+    background-color: red;
+    width: 200px;
+    height: 200px;
+    /* border: 1px solid white; */
+    /* flex: 3; */
+}
