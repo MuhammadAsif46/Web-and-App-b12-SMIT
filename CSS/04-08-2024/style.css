@@ -1,0 +1,16 @@
+.container{
+    border: 1px solid red;
+}
+
+.row{
+    background-color: aqua;
+}
+
+.col-3{
+    color: #fff;
+}
+
+.box{
+    border: 1px solid black;
+
+}
