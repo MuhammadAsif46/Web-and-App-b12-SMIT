@@ -62,22 +62,22 @@
 
 // chapter 18 : FOR LOOP --> Flags, Booleans, array length,and loopus interruptus
 
-var cities = ["karachi", "lahore", "peshawar", "multan"];
-var userCity = prompt("Enter your city");
-var flag = false;
+// var cities = ["karachi", "lahore", "peshawar", "multan"];
+// var userCity = prompt("Enter your city");
+// var flag = false;
 
-for (var i = 0; i < cities.length; i++) {
-  if (cities[i] === userCity) {
-    flag = true;
-    break;
-  }
-}
+// for (var i = 0; i < cities.length; i++) {
+//   if (cities[i] === userCity) {
+//     flag = true;
+//     break;
+//   }
+// }
 
-if (flag) {
-  alert("true");
-} else {
-  alert("false");
-}
+// if (flag) {
+//   alert("true");
+// } else {
+//   alert("false");
+// }
 
 // for(var i = 0; i < 10; i++){
 //     console.log(i);
@@ -85,3 +85,13 @@ if (flag) {
 //         break;
 //     }
 // }
+
+
+// Multi multidimensional array:
+
+// var arr = ["asif","ahmed","ali","khan"]
+// console.log(arr[2]);
+
+// var arr = [["asif",["ahmed","raza"]],["ali","khan"]]
+// // console.log(arr[1][1]);
+// console.log(arr[0][1][1]);
