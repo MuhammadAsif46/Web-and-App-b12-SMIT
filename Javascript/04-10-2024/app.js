@@ -36,12 +36,24 @@
 // var num = Math.random() * 1
 
 
-var bigDecimal = Math.random();
-// console.log(bigDecimal);
-var improvedNum = (bigDecimal * 2) + 1;
-// console.log(improvedNum);
-var numberOfStars = Math.floor(improvedNum);
+// var bigDecimal = Math.random();
+// // console.log(bigDecimal);
+// var improvedNum = (bigDecimal * 2) + 1;
+// // console.log(improvedNum);
+// var numberOfStars = Math.floor(improvedNum);
 // console.log(numberOfStars);
 
 
+var p1 = prompt("enter player1 name?")
+var p2 = prompt("enter player2 name?")
+var num = prompt("enter your fav number?")
+
+var randomNumber = Math.floor(Math.random() * 2) 
+console.log(randomNumber);
+
+if (randomNumber === 0) {
+    console.log(p1 + "Hat");
+}else{
+    console.log(p2 + " Tail");
+}
 
