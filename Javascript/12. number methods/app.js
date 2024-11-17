@@ -56,4 +56,3 @@ if (randomNumber === 0) {
 }else{
     console.log(p2 + " Tail");
 }
-
