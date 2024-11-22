@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Filter</title>
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 10px;
+            display: inline-block;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mobile Selector</h1>
+
+    <label for="brandSelect">Select Brand: </label>
+    <select id="brandSelect">
+        <option value="all">All</option>
+        <option value="apple">Apple</option>
+        <option value="samsung">Samsung</option>
+        <option value="infinex">Infinex</option>
+    </select>
+
+    <div id="mobileCards"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+  
