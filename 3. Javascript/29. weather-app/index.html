@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    #weather{
+        border: 1px solid black;
+        width: 500px;
+        height: 500px;
+        margin: 0 auto;
+        border-radius: 20px;
+    }
+    .temp{
+        color: red;
+        text-align: center;
+    }
+    p{
+        text-align: center;
+        font-size: 18px;
+    }
+</style>
+<body>
+    <input type="text" id="city">
+    <button onclick="getWeather()">submit</button>
+    <div id="weather">
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
