@@ -1,0 +1,21 @@
+1. Variable Scoping  		-- Done
+2. Template literals 		-- Done
+3. Ternary Operator 		-- Done
+4. Destructuring 		-- Done
+5. Default parameters 	-- Done
+6. Rest parameter 		-- Done
+7. Spread Operator 		-- Done
+8. Map 			-- Done
+9. Array methods 		-- Done
+10. Closure			-- Remaining
+11. Arrow functions			-- Remaining
+12. Enhanced object literals		-- Remaining
+13. Iterators & For..of		-- Remaining
+14. Generators			-- Remaining
+15. Modules			-- Remaining
+16. Higher-order function		-- Remaining
+17. CallBack			-- Remaining
+18. Promises			-- Remaining
+19. Exponentiation Operator		-- Remaining
+20. Classes			-- Remaining
+21. Optional chaining		-- Remaining
