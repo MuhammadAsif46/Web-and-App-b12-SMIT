@@ -1,21 +1,21 @@
-1. Variable Scoping  		-- Done
-2. Template literals 		-- Done
-3. Ternary Operator 		-- Done
-4. Destructuring 		-- Done
-5. Default parameters 	-- Done
-6. Rest parameter 		-- Done
-7. Spread Operator 		-- Done
-8. Map 			-- Remaining
-9. Array methods 		-- Done
-10. Closure			-- Remaining
-11. Arrow functions			-- Done
-12. Enhanced object literals		-- Remaining
-13. Iterators & For..of		-- Remaining
-14. Generators			-- Remaining
-15. Modules			-- Remaining
-16. Higher-order function		-- Remaining
-17. CallBack			-- Remaining
-18. Promises			-- Remaining
-19. Exponentiation Operator		-- Remaining
-20. Classes			-- Remaining
-21. Optional chaining		-- Remaining
+1. Variable Scoping  		-- Done 	-- (13-Dec-2024)
+2. Template literals 		-- Done	-- (13-Dec-2024)
+3. Ternary Operator 		-- Done	-- (13-Dec-2024)
+4. Destructuring 		-- Done	-- (15-Dec-2024)
+5. Default parameters 	-- Done	-- (15-Dec-2024)
+6. Rest parameter 		-- Done	-- (15-Dec-2024)
+7. Spread Operator 		-- Done	-- (15-Dec-2024)
+8. Map 			-- Done	-- (22-Dec-2024)
+9. Array methods 		-- Done	-- (15-Dec-2024)
+10. Closures			-- Done	-- (22-Dec-2024)
+11. Arrow functions			-- Done	-- (20-Dec-2024)
+12. Enhanced object literals		-- Done	-- (20-Dec-2024)
+13. Iterators & For..of		-- Done	-- (20-Dec-2024)
+14. Generators			-- Done	-- (22-Dec-2024)
+15. Modules			-- Done	-- (22-Dec-2024)
+16. Higher-order function		-- Done	-- (22-Dec-2024)
+17. CallBack			-- Done	-- (22-Dec-2024)
+18. Promises			-- Done	-- (22-Dec-2024)
+19. Exponentiation Operator		-- Done	-- (22-Dec-2024)
+20. Classes			-- Done	-- (20-Dec-2024)
+21. Optional chaining		-- Done   	-- (22-Dec-2024)
