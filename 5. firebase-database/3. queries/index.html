@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       .main{
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        .mt-10{
+            margin-top: 20px;
+             display: flex;
+             justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div>
+        <input type="text" id="post">
+        <button id="createPost">Post</button>
+        <button id="deletePost">DeleteAll</button>
+    </div>
+
+    <div class="main">
+        <div id="main"></div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
