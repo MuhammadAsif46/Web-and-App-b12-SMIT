@@ -11,8 +11,9 @@
 
     <script>
       const { createClient } = supabase;
-      const project_URL = "<your-project-url>";
-      const project_API_KEY = "<your-api-key>"
+      const project_URL = "<your_project_url>";
+      const project_API_KEY = "<your_Api_Key>";
+
       const supabaseConfig = createClient(project_URL, project_API_KEY);
 
       console.log("Supabase Instance: ", supabaseConfig);
