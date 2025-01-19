@@ -17,14 +17,14 @@ import {
   increment,
   deleteDoc,
 } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-const firebaseConfig = {
-  apiKey: "<your-api-key>",
-  authDomain: "smit-batch-12-bba98.firebaseapp.com",
-  projectId: "smit-batch-12-bba98",
-  storageBucket: "smit-batch-12-bba98.firebasestorage.app",
-  messagingSenderId: "283018929754",
-  appId: "1:283018929754:web:8cc72954132661408e1a63",
-};
+// const firebaseConfig = {
+//   apiKey: "<your-api-key>",
+//   authDomain: "<your-authDomain>",
+//   projectId: "<your-projectId>",
+//   storageBucket: "<your-messagingSenderId>",
+//   messagingSenderId: "<your-api-key>",
+//   appId: "<your-appId>",
+// };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

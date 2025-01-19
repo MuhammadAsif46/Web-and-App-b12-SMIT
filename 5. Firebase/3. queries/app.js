@@ -12,14 +12,14 @@ import {
   limit,
   where
 } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyCcDba7w8OQqgWBCmje7-0qDWJHESQDJmA",
-  authDomain: "smit-batch-12-bba98.firebaseapp.com",
-  projectId: "smit-batch-12-bba98",
-  storageBucket: "smit-batch-12-bba98.firebasestorage.app",
-  messagingSenderId: "283018929754",
-  appId: "1:283018929754:web:8cc72954132661408e1a63",
-};
+// const firebaseConfig = {
+//   apiKey: "<your-api-key>",
+//   authDomain: "<your-authDomain>",
+//   projectId: "<your-projectId>",
+//   storageBucket: "<your-messagingSenderId>",
+//   messagingSenderId: "<your-api-key>",
+//   appId: "<your-appId>",
+// };
 
 // initialization:
 const app = initializeApp(firebaseConfig);
