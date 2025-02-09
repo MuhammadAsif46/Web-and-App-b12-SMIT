@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #111;
+}
+
+
+#box1{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}
+#box2{
+    width: 200px;
+    height: 200px;
+    background-color: lightblue;
+}
+#box3{
+    width: 200px;
+    height: 200px;
+    background-color: rgb(85, 195, 231);
+}
