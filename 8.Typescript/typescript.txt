@@ -1,0 +1,10 @@
+TS Compiler 		--done
+Type Annotations 		--done
+Interfaces 		--done
+Classes			--done
+Generics			--pending
+Enums			-- done
+Type Inference 		--done
+Union and Intersection Types 	--done
+Type Guards		--done
+Decorators		--pending
