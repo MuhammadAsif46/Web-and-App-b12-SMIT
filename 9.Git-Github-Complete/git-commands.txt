@@ -1,0 +1,27 @@
+1. git --version
+2. git status
+3. git config --global user.email "your-email@example.com"
+4. git config --global user.name "your name"
+5. git config --list
+6. git status
+7. git init
+8. Write -> add -> commit
+9. git add <file1> <file2>
+10. git commit -m "write message"
+11. git log
+12. git log --oneline
+13. git branch 
+14. git branch <branch-name>
+15. git switch <branch-name>
+16. git log
+17. git switch master
+18. git switch -c <branch-name>
+19. git checkout orange-mode
+20. git checkout main
+21. git merge <branch-name> 
+22. git rebase <branch-name> 
+23. git cherry-pick <id>
+
+-------Assignment--------- 
+Rename branch: ==========>>>  git branch -m <old-branch-name> <new-branch-name>
+Delete branch: =======>>>  git branch -d <branch-name> 
