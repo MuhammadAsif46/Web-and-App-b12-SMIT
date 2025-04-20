@@ -6,7 +6,11 @@ const Login = () => {
   const navigate = useNavigate();
 
   const loginHandler = () => {
-    navigate("/about");
+    localStorage.setItem("user", true)
+    navigate("/profile")
+    // navigate("/about", {
+    //   state: { userName: "AliBaba", email: "abc@gmail.com" },
+    // });
   };
 
   return (
