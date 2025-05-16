@@ -1,0 +1,17 @@
+.about {
+    background-color: yellow;
+    color: black;
+}
+
+.home {
+    background-color: red;
+    color: white;
+}
+
+.list{
+    display: flex;
+    justify-content: space-between;
+    background-color: aqua;
+    color: #000;
+    padding: 10px;
+}
