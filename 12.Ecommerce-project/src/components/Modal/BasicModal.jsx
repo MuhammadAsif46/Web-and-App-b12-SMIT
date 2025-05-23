@@ -3,20 +3,21 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import ProductDetail from '../ProductDetail/ProductDetail';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 900,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '2px solid #83c5be',
   boxShadow: 24,
-  p: 4,
+  // p: 4,
 };
 
-export default function BasicModal({ open, setOpen }) {
+export default function BasicModal({ open, setOpen, detail }) {
 
   const handleClose = () => setOpen(false);
 
@@ -28,13 +29,8 @@ export default function BasicModal({ open, setOpen }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} style={{width:900, height:500}}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text saylani
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+        <Box sx={style}>
+          <ProductDetail detail={detail}/>
         </Box>
       </Modal>
     </div>

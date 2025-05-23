@@ -16,16 +16,25 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CartContext from '../../Context/cart';
+import { useSearchParams } from 'react-router-dom';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = ["All",'Electronics', 'Jewelery', "men's clothing", "women's clothing"];
 
 function NavBar(props) {
+  const { cart } = React.useContext(CartContext)
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [cartDrawer, setCartDrawer] = React.useState(false);
+   let [searchParams, setSearchParams] = useSearchParams();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const handleCartDrawerToggle = () => {
+    setCartDrawer((prevState) => !prevState);
   };
 
   const drawer = (
@@ -79,13 +88,15 @@ function NavBar(props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
+              <Button onClick={()=> setSearchParams({
+                category: item.toLowerCase()
+              })} key={item} sx={{ color: '#fff' }}>
                 {item}
               </Button>
             ))}
           </Box>
-          <Badge badgeContent={2} color="primary">
-            <ShoppingCartIcon style={{color:"red"}} />
+          <Badge onClick={handleCartDrawerToggle} badgeContent={cart.length} color="primary">
+            <ShoppingCartIcon style={{ color: "white" }} />
           </Badge>
         </Toolbar>
       </AppBar>
@@ -107,6 +118,24 @@ function NavBar(props) {
           {drawer}
         </Drawer>
       </nav>
+      <Drawer
+        anchor="right"
+        container={container}
+        variant="temporary"
+        open={cartDrawer}
+        onClose={handleCartDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          display: { xs: 'none', md: 'block' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+        }}
+      >
+        <div style={{ background: "#83c5be", color: "#fff", padding: 20, textAlign: "center" }}>
+          {cart.length}
+        </div>
+      </Drawer>
     </Box>
   );
 }
