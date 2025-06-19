@@ -11,6 +11,8 @@ export const loginUser = async (req, res) => {
             return res.status(409).send({ status: 409, message: "Email or Password Required" })
         }
 
+        // await userValidationSchema.validateAsync(req.body);
+
         const existedUser = await User.findOne({ email }).then(res => res.toObject())
 
 

@@ -17,7 +17,7 @@ const UserSchema = new Schema({
     },
     phone: {
         type: Schema.Types.Number,
-        required: true
+        // required: true
     },
 })
 
