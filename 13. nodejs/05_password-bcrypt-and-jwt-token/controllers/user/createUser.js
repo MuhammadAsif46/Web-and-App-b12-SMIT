@@ -40,7 +40,7 @@ export const CreateUser = async (req, res) => {
 
         transporter.sendMail({
             to: createUser.email,
-            from:"asifahmed32c@gmail.com",
+            from:"<YOUR_EMAIL>",
             text: `Hi, ${createUser.username} 
             Welcome Your account is created successfully`,
             subject: 'Email send testing'

@@ -5,8 +5,8 @@ const transporter = nodemailer.createTransport({
   host: "smtp.ethereal.email",
   service:"gmail",
   auth: {
-    user: "asifahmed32c@gmail.com",
-    pass: "gbmuftidgocajsqu",
+    user: "<YOUR_EMAIL>",
+    pass: "<APP_PASSWORD>",
   },
 });
 
