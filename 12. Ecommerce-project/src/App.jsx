@@ -5,6 +5,7 @@ import axios from 'axios'
 import BasicModal from './components/Modal/BasicModal'
 import CartContext from './Context/cart'
 import { useSearchParams } from 'react-router-dom';
+import Profile from './components/Profile/Profile'
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
   const [cart, setCart] = useState(0)
   let [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get("category")
-  console.log("category", category);
+  // console.log("category", category);
 
 
   useEffect(() => {
@@ -46,7 +47,7 @@ function App() {
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem("cart")) || []
-    setCart(cartData)
+    setCart(cartData.length)
   }, [])
 
 
@@ -54,10 +55,11 @@ function App() {
     <div>
       <CartContext.Provider value={{ cart, setCart }}>
         <NavBar />
-        <BasicModal open={open} setOpen={setOpen} detail={detail} />
+        {/* <BasicModal open={open} setOpen={setOpen} detail={detail} />
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around", gap: "30px", padding: 30, marginTop: 50 }}>
           {products.map((val, idx) => <MuiCard viewDetails={viewDetails} product={val} key={idx} />)}
-        </div>
+        </div> */}
+        <Profile/>
       </CartContext.Provider>
     </div>
   )

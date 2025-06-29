@@ -15,7 +15,7 @@ export default function MuiCard({ product, viewDetails }) {
 
     const addToCart = () => {
         const cartData = JSON.parse(localStorage.getItem("cart")) || [];
-        cartData.push(product)
+        cartData.push(product.id)
         localStorage.setItem("cart", JSON.stringify(cartData))
         setCart(cartData.length)
     }

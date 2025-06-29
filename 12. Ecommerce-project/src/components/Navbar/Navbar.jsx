@@ -95,7 +95,7 @@ function NavBar(props) {
               </Button>
             ))}
           </Box>
-          <Badge onClick={handleCartDrawerToggle} badgeContent={cart.length} color="primary">
+          <Badge onClick={handleCartDrawerToggle} badgeContent={cart} color="primary">
             <ShoppingCartIcon style={{ color: "white" }} />
           </Badge>
         </Toolbar>
