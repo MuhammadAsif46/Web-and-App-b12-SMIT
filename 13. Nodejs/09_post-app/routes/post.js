@@ -5,8 +5,6 @@ import { getAllPost, getPostByName, addPost, deletePost, updatePost } from "../c
 const router = express.Router()
 
 
-
-
 router.get("/posts", getAllPost)
 
 router.get("/post/:username", getPostByName)
