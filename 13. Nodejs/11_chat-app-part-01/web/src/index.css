@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+  }
+}
+
+@layer components {
+  .chat-bubble {
+    @apply max-w-xs px-4 py-2 rounded-lg mb-2 transition-all duration-200;
+  }
+  
+  .chat-bubble.sent {
+    @apply bg-green-100 text-gray-800 ml-auto shadow-sm;
+  }
+  
+  .chat-bubble.received {
+    @apply bg-white text-gray-800 shadow-sm;
+  }
+
+  .chat-bubble:hover {
+    @apply shadow-md;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center p-3 hover:bg-gray-100 cursor-pointer transition-all duration-200;
+  }
+  
+  .sidebar-item.active {
+    @apply bg-gray-100;
+  }
+
+  .sidebar-item:hover {
+    @apply transform scale-[1.02];
+  }
+
+  /* Typing animation */
+  @keyframes typing {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .typing-dot {
+    animation: typing 1.4s infinite ease-in-out;
+  }
+
+  .typing-dot:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  /* Message slide-in animation */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .message-enter {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  /* Pulse animation for online status */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .online-indicator {
+    animation: pulse 2s infinite;
+  }
+}
