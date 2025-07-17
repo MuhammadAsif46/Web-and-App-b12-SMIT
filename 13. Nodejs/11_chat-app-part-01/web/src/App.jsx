@@ -1,60 +1,50 @@
-import { useState } from 'react'
-import Sidebar from './components/Sidebar'
-import Chat from './components/Chat'
-import { Menu } from 'lucide-react'
-import './App.css'
+import React, { useEffect, useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
-function App() {
-  const [selectedChat, setSelectedChat] = useState(null)
-  const [sidebarOpen, setSidebarOpen] = useState(false)
- 
+const App = () => {
+  const isUser = localStorage.getItem("token") || false;
+  const [user, setUser] = useState(JSON.parse(isUser));
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSelectChat = (chat) => {
-    setSelectedChat(chat)
-    setSidebarOpen(false) // Close sidebar on mobile when chat is selected
+  useEffect(() => {
+    if (user) {
+      setUser(user);
+    } else {
+      setUser(null);
+    }
+    setIsLoading(false);
+  }, [user]);
+
+  if (isLoading) {
+    // Show a loading message or component while auth state is being determined
+    return (
+      <div
+        className="flex justify-center items-center text-4xl"
+        style={{ height: "100vh" }}
+      >
+        Loading...
+      </div>
+    );
   }
-
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Mobile Menu Button */}
-      <div className="lg:hidden fixed top-4 left-4 z-50">
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-2 bg-green-600 text-white rounded-lg shadow-lg"
-        >
-          <Menu size={24} />
-        </button>
-      </div>
+    <Routes>
+      <Route
+        path="/login"
+        element={user ? <Navigate to="/" /> : <LoginPage />}
+      />
+      <Route
+        path="/signup"
+        element={user ? <Navigate to="/" /> : <SignupPage />}
+      />
+      <Route
+        path="/"
+        element={user ? <HomePage /> : <Navigate to="/login" />}
+      />
+    </Routes>
+  );
+};
 
-      {/* Sidebar */}
-      <div className={`
-        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-        lg:translate-x-0
-        fixed lg:relative
-        z-40
-        transition-transform duration-300 ease-in-out
-        w-80 bg-white border-r border-gray-200 flex flex-col
-      `}>
-        <Sidebar 
-          selectedChat={selectedChat}
-          onSelectChat={handleSelectChat}
-        />
-      </div>
-
-      {/* Overlay for mobile */}
-      {sidebarOpen && (
-        <div 
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      {/* Chat Area */}
-      <div className="flex-1 lg:ml-0">
-        <Chat selectedChat={selectedChat} />
-      </div>
-    </div>
-  )
-}
-
-export default App
+export default App;

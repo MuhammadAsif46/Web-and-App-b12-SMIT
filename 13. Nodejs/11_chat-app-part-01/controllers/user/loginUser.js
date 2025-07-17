@@ -14,12 +14,15 @@ export const loginUser = async (req, res) => {
 
         // await userValidationSchema.validateAsync(req.body);
 
-        const existedUser = await User.findOne({ email }).then(res => res.toObject())
+        const existedUser = await User.findOne({ email })
+        // const existedUser = await User.findOne({ email }).then(res => res.toObject())
 
 
         if (!existedUser) {
             return res.status(402).send({ status: 402, message: "User Not found!", })
         }
+
+        // const userObj = existedUser.toObject()
 
         const passwordCompare = await bcrypt.compare(password, existedUser.password)
 
