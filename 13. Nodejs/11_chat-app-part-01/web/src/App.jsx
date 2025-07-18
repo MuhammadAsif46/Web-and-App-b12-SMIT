@@ -1,25 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import UserContext from "./context/userContext";
+
 
 const App = () => {
-  const isUser = localStorage.getItem("token") || false;
-  const [user, setUser] = useState(JSON.parse(isUser));
+  const token = localStorage.getItem("token");
+
+  // const [user, setUser] = useState(JSON.parse(token));
+  const { isUser, setIsUser } = useContext(UserContext);
+  console.log("user--", isUser);
+
+
+
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      setUser(user);
+    if (isUser) {
+      setIsUser(isUser);
     } else {
-      setUser(null);
+      setIsUser(false);
     }
     setIsLoading(false);
-  }, [user]);
+  }, [isUser]);
 
-  if (isLoading) {
-    // Show a loading message or component while auth state is being determined
+  if (isLoading && isUser === false) {
     return (
       <div
         className="flex justify-center items-center text-4xl"
@@ -33,15 +40,15 @@ const App = () => {
     <Routes>
       <Route
         path="/login"
-        element={user ? <Navigate to="/" /> : <LoginPage />}
+        element={isUser ? <Navigate to="/" /> : <LoginPage />}
       />
       <Route
         path="/signup"
-        element={user ? <Navigate to="/" /> : <SignupPage />}
+        element={isUser ? <Navigate to="/" /> : <SignupPage />}
       />
       <Route
         path="/"
-        element={user ? <HomePage /> : <Navigate to="/login" />}
+        element={isUser ? <HomePage /> : <Navigate to="/login" />}
       />
     </Routes>
   );

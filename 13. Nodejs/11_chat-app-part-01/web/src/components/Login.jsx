@@ -1,8 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState ,useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { BaseUrl } from "../constants";
+import UserContext from "../context/userContext";
 
 const Login = () => {
+    const {setIsLoggedIn,setIsUser} = useContext(UserContext)
+
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const [user, setUser] = useState({
@@ -21,18 +25,16 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/login", obj);
-      console.log("response-->", response);
-      console.log("res-data--",response.data);
+      const response = await axios.post(`${BaseUrl}/api/v1/login`, obj);
+      console.log("res-data--", response.data.data);
       if (response) {
-        localStorage.setItem("token", JSON.stringify(response.token))
-        Swal.fire({
-          icon: "success",
-          title: "you are logged in successfully ",
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        navigate("/profile");
+        localStorage.setItem("token", JSON.stringify(response.data.token))
+        setIsUser(true)
+        setIsLoggedIn(response.data.data)
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      
       }
     } catch (error) {
       // console.log(error.code);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import {
   Send,
   Paperclip,
@@ -11,10 +11,17 @@ import {
   ArrowLeft
 } from 'lucide-react'
 import profileImage from "../assets/profile.png"
+import { BaseUrl } from '../constants'
+import UserContext from '../context/userContext'
+import axios from 'axios'
 
 
 const Chat = ({ selectedChat }) => {
   const [message, setMessage] = useState('')
+  const { isLoggedIn, isUser } = useContext(UserContext)
+  // console.log("asif-->", isUser);
+  
+
   const [isTyping, setIsTyping] = useState(false)
   const [messages, setMessages] = useState([
     {
@@ -60,27 +67,58 @@ const Chat = ({ selectedChat }) => {
     }
   }, [selectedChat])
 
-  const handleSendMessage = () => {
-    if (message.trim()) {
-      const newMessage = {
-        id: messages.length + 1,
-        text: message,
-        sender: 'sent',
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      }
-      setMessages([...messages, newMessage])
-      setMessage('')
+  const handleSendMessage = async () => {
+    // if (message.trim()) {
+    //   const newMessage = {
+    //     id: messages.length + 1,
+    //     text: message,
+    //     sender: 'sent',
+    //     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    //   }
+    //   setMessages([...messages, newMessage])
+    //   setMessage('')
 
-      // Simulate received message
-      setTimeout(() => {
-        const replyMessage = {
-          id: messages.length + 2,
-          text: 'Thanks for the message! I\'ll get back to you soon.',
-          sender: 'received',
-          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    //   // Simulate received message
+    //   setTimeout(() => {
+    //     const replyMessage = {
+    //       id: messages.length + 2,
+    //       text: 'Thanks for the message! I\'ll get back to you soon.',
+    //       sender: 'received',
+    //       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    //     }
+    //     setMessages(prev => [...prev, replyMessage])
+    //   }, 1000)
+    // }
+    // console.log("isLoggedIn-->", isLoggedIn);
+
+    const obj = {
+      messageText: message,
+      to_id: selectedChat._id,
+    }
+
+    // console.log("obj-->", obj);
+
+
+    try {
+      const response = await axios.post(`${BaseUrl}/api/v1/message`, obj, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`
         }
-        setMessages(prev => [...prev, replyMessage])
-      }, 1000)
+      });
+      console.log("res-data--", response.data);
+      setMessage('')
+      // if (response) {
+      //   localStorage.setItem("token", JSON.stringify(response.data.token))
+      //   setIsLoggedIn(response.data.data)
+      //   setIsUser(true)
+      //   setTimeout(() => {
+      //     navigate("/");
+      //   }, 3000);
+
+      // }
+    } catch (error) {
+      console.log(error.code);
+      // setErrorMessage(error.code);
     }
   }
 
@@ -121,7 +159,7 @@ const Chat = ({ selectedChat }) => {
               <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white rounded-full online-indicator"></div>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">{selectedChat.name}</h3>
+              <h3 className="font-semibold text-gray-900">{selectedChat.username}</h3>
               <p className="text-sm text-green-500">online</p>
             </div>
           </div>
