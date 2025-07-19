@@ -7,16 +7,20 @@ import {
   Info,
   Filter,
   Camera,
-  Edit
+  Edit,
+  LogOutIcon
 } from 'lucide-react'
 import axios from "axios"
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import profileImage from "../assets/profile.png"
+import UserContext from '../context/userContext'
 
 const Sidebar = ({ selectedChat, onSelectChat }) => {
 
   const [users, setUsers] = useState([])
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false)  
+  const {setIsUser } = useContext(UserContext);
+  
 
   const getChats = async () => {
     try {
@@ -36,6 +40,10 @@ const Sidebar = ({ selectedChat, onSelectChat }) => {
     getChats()
   }, [])
   
+  const logoutHandler = () =>{
+    localStorage.removeItem("token")
+    setIsUser(false);
+  }
 
   return (
     <div className="w-80 bg-white border-r border-gray-200 flex flex-col h-full">
@@ -141,9 +149,12 @@ const Sidebar = ({ selectedChat, onSelectChat }) => {
 
       {/* New Chat Button */}
       <div className="p-4 border-t border-gray-200">
-        <button className="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center justify-center space-x-2">
-          <MessageCircle size={20} />
-          <span>New Chat</span>
+        <button className="w-full bg-red-500 text-white py-3 rounded-lg font-semibold hover:bg-red-600 hover:cursor-pointer transition-colors flex items-center justify-center space-x-2"
+        onClick={logoutHandler}
+        >
+          {/* <MessageCircle size={20} /> */}
+          <LogOutIcon size={20} />
+          <span>Logout</span>
         </button>
       </div>
     </div>

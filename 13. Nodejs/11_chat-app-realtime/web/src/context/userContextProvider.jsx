@@ -4,8 +4,10 @@ import UserContext from './userContext';
 const UserContextProvider = ({children}) => {
 
   const token = localStorage.getItem("token");
+  console.log("token-->", token);
+  
     const [isLoggedIn, setIsLoggedIn] = useState(null)
-    const [isUser, setIsUser] = useState(JSON.parse(token))
+    const [isUser, setIsUser] = useState(token ? true : false)
     console.log("isUser-->", isUser);
     
   return (

@@ -1,14 +1,15 @@
 import axios from "axios";
-import React, { useState ,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BaseUrl } from "../constants";
 import UserContext from "../context/userContext";
 
 const Login = () => {
-    const {setIsLoggedIn,setIsUser} = useContext(UserContext)
+  const { setIsLoggedIn, setIsUser } = useContext(UserContext);
 
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+  const [loader, setLoader] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -21,28 +22,38 @@ const Login = () => {
 
     const obj = {
       email: user.email,
-      password: user.password
-    }
+      password: user.password,
+    };
 
     try {
+      setLoader(true);
       const response = await axios.post(`${BaseUrl}/api/v1/login`, obj);
       console.log("res-data--", response.data.data);
       if (response) {
-        localStorage.setItem("token", JSON.stringify(response.data.token))
-        setIsUser(true)
-        setIsLoggedIn(response.data.data)
-        setTimeout(() => {
-          navigate("/");
-        }, 3000);
-      
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        setIsUser(true);
+        setIsLoggedIn(response.data.data);
+        // setTimeout(() => {
+        //   navigate("/");
+        // }, 3000);
       }
+      setLoader(false);
     } catch (error) {
       // console.log(error.code);
       setErrorMessage(error.code);
     }
   };
 
-
+  if (loader) {
+    return (
+      <div
+        className="flex justify-content-center items-center"
+        style={{ height: "100vh", width: "100%" }}
+      >
+        <h1 className="text-5xl w-full text-center">Loading...</h1>
+      </div>
+    );
+  }
 
   return (
     <>

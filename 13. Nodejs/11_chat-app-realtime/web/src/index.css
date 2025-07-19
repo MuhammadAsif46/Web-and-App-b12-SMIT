@@ -53,9 +53,9 @@
     @apply bg-gray-100;
   }
 
-  .sidebar-item:hover {
+  /* .sidebar-item:hover {
     @apply transform scale-[1.02];
-  }
+  } */
 
   /* Typing animation */
   @keyframes typing {

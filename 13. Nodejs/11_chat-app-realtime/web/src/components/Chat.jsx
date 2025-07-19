@@ -131,7 +131,7 @@ const Chat = ({ selectedChat }) => {
 
   if (!selectedChat) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-gray-50">
+      <div className="flex-1 flex items-center justify-center bg-gray-50 h-full">
         <div className="text-center">
           <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
             <span className="text-white text-2xl font-bold">W</span>
