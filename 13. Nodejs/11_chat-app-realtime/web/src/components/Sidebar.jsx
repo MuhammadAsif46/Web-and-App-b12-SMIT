@@ -8,42 +8,42 @@ import {
   Filter,
   Camera,
   Edit,
-  LogOutIcon
-} from 'lucide-react'
-import axios from "axios"
-import { useContext, useEffect, useState } from 'react'
-import profileImage from "../assets/profile.png"
-import UserContext from '../context/userContext'
+  LogOutIcon,
+} from "lucide-react";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import profileImage from "../assets/profile.png";
+import UserContext from "../context/userContext";
 
 const Sidebar = ({ selectedChat, onSelectChat }) => {
-
-  const [users, setUsers] = useState([])
-  const [loader, setLoader] = useState(false)  
-  const {setIsUser } = useContext(UserContext);
-  
+  const [users, setUsers] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const { setIsUser,isLoggedIn } = useContext(UserContext);
 
   const getChats = async () => {
     try {
-      setLoader(true)
-      await axios.get("http://localhost:5000/api/v1/users")
-        .then(res => setUsers(res.data.data))
-        .catch(err => console.log(err))
+      setLoader(true);
+      await axios
+        .get("http://localhost:5000/api/v1/users")
+        .then((res) => setUsers(res.data.data))
+        .catch((err) => console.log(err));
 
-      setLoader(false)
+      setLoader(false);
     } catch (error) {
-      setLoader(false)
+      setLoader(false);
       console.log("err", error.message);
     }
-  }
+  };
 
   useEffect(() => {
-    getChats()
-  }, [])
-  
-  const logoutHandler = () =>{
-    localStorage.removeItem("token")
+    getChats();
+  }, []);
+
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setIsUser(false);
-  }
+  };
 
   return (
     <div className="w-80 bg-white border-r border-gray-200 flex flex-col h-full">
@@ -76,7 +76,10 @@ const Sidebar = ({ selectedChat, onSelectChat }) => {
       {/* Search Bar */}
       <div className="p-3 bg-gray-50">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+          <Search
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            size={20}
+          />
           <input
             type="text"
             placeholder="Search or start new chat"
@@ -113,44 +116,56 @@ const Sidebar = ({ selectedChat, onSelectChat }) => {
 
       {/* Chat List */}
       <div className="flex-1 overflow-y-auto">
-        {users.map((eachuser, index) => (
-          <div
-            key={index}
-            onClick={() => onSelectChat(eachuser)}
-            className={`sidebar-item ${selectedChat?.id === eachuser.id ? 'active' : ''}`}
-          >
-            <div className="relative">
-              <img
-                src={eachuser.avatar ? eachuser.avatar : profileImage}
-                alt={eachuser.username}
-                className="w-12 h-12 rounded-full"
-              />
-              {eachuser.unread > 0 && (
-                <div className="absolute -top-1 -right-1 bg-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
-                  {eachuser.unread}
-                </div>
-              )}
-            </div>
-            <div className="flex-1 ml-3 min-w-0">
-              <div className="flex items-center justify-between">
-                <h3 className="font-semibold text-gray-900 truncate">{eachuser.username}</h3>
-                <span className="text-xs text-gray-500">{eachuser.time}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className="text-sm text-gray-600 truncate">{eachuser.lastMessage ? eachuser.lastMessage : "How Are You!"}</p>
+        {users.map((eachuser, index) => {
+          if(eachuser?._id === isLoggedIn?._id) return null; // Skip the logged-in user
+          return (
+            <div
+              key={index}
+              onClick={() => onSelectChat(eachuser)}
+              className={`sidebar-item ${
+                selectedChat?.id === eachuser.id ? "active" : ""
+              }`}
+            >
+              <div className="relative">
+                <img
+                  src={eachuser.avatar ? eachuser.avatar : profileImage}
+                  alt={eachuser.username}
+                  className="w-12 h-12 rounded-full"
+                />
                 {eachuser.unread > 0 && (
-                  <div className="w-2 h-2 bg-green-500 rounded-full ml-2 flex-shrink-0"></div>
+                  <div className="absolute -top-1 -right-1 bg-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
+                    {eachuser.unread}
+                  </div>
                 )}
               </div>
+              <div className="flex-1 ml-3 min-w-0">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-semibold text-gray-900 truncate">
+                    {eachuser.username}
+                  </h3>
+                  <span className="text-xs text-gray-500">{eachuser.time}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-gray-600 truncate">
+                    {eachuser.lastMessage
+                      ? eachuser.lastMessage
+                      : "How Are You!"}
+                  </p>
+                  {eachuser.unread > 0 && (
+                    <div className="w-2 h-2 bg-green-500 rounded-full ml-2 flex-shrink-0"></div>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* New Chat Button */}
-      <div className="p-4 border-t border-gray-200">
-        <button className="w-full bg-red-500 text-white py-3 rounded-lg font-semibold hover:bg-red-600 hover:cursor-pointer transition-colors flex items-center justify-center space-x-2"
-        onClick={logoutHandler}
+      <div className="px-4 py-3 border-t border-gray-200">
+        <button
+          className="w-full bg-red-500 text-white py-3 rounded-lg font-semibold hover:bg-red-600 hover:cursor-pointer transition-colors flex items-center justify-center space-x-2"
+          onClick={logoutHandler}
         >
           {/* <MessageCircle size={20} /> */}
           <LogOutIcon size={20} />
@@ -158,7 +173,7 @@ const Sidebar = ({ selectedChat, onSelectChat }) => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar 
+export default Sidebar;

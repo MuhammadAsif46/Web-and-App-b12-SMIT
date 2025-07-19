@@ -10,7 +10,7 @@ const App = () => {
   const token = localStorage.getItem("token");
 
   // const [user, setUser] = useState(JSON.parse(token));
-  const { isUser, setIsUser } = useContext(UserContext);
+  const { isUser, setIsUser, isLoggedIn } = useContext(UserContext);
   // console.log("user--", isUser);
 
 
@@ -24,7 +24,7 @@ const App = () => {
       setIsUser(isUser);
     }
     // setIsLoading(false);
-  }, [isUser]);
+  }, [isUser,isLoggedIn]);
 
   // if (isLoading && isUser === false) {
   //   return (

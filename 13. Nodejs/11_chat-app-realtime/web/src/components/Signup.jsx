@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import UserContext from "../context/userContext";
+import { BaseUrl } from "../constants";
+import axios from "axios";
 // import {
 //   auth,
 //   createUserWithEmailAndPassword,
@@ -10,6 +13,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [loader, setLoader] = useState(false);
+  const { setIsLoggedIn, setIsUser } = useContext(UserContext);
+
   const [errorMessage, setErrorMessage] = useState("");
   const [user, setUser] = useState({
     email: "",
@@ -21,36 +27,41 @@ const Signup = () => {
   const signupUser = async (e) => {
     e.preventDefault();
 
+    const obj = {
+      email: user.email,
+      password: user.password,
+      username: user.userName,
+    };
+
     try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        user.email,
-        user.password
-      );
-      const newUser = response.user;
-
-      if (newUser) {
-        await updateProfile(newUser, {
-          displayName: user.userName,
-        });
-        Swal.fire({
-          icon: "success",
-          title: "your accout has been created please login!",
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        navigate("/profile");
+      setLoader(true);
+      const response = await axios.post(`${BaseUrl}/api/v1/signup`, obj);
+      console.log("res-data--", response.data.data);
+      if (response) {
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        localStorage.setItem("user", JSON.stringify(response.data.data));
+        setIsUser(true);
+        // setIsLoggedIn(response.data.data);
+        // setTimeout(() => {
+        //   navigate("/");
+        // }, 3000);
       }
-
-      console.log(response.user);
-      // Navigate to profile page or another page
-      // navigate("/profile");
+      setLoader(false);
     } catch (error) {
-      // console.log(error.message);
       // console.log(error.code);
       setErrorMessage(error.code);
     }
   };
+  if (loader) {
+    return (
+      <div
+        className="flex justify-content-center items-center"
+        style={{ height: "100vh", width: "100%" }}
+      >
+        <h1 className="text-5xl w-full text-center">Loading...</h1>
+      </div>
+    );
+  }
 
   return (
     <>
