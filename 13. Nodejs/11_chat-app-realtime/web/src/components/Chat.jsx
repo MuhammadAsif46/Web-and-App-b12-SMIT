@@ -21,7 +21,7 @@ import moment from 'moment';
 const Chat = ({ selectedChat }) => {
   const [message, setMessage] = useState("");
   const { isLoggedIn, isUser } = useContext(UserContext);
-  console.log("isLoggedIn-->", isLoggedIn);
+  // console.log("isLoggedIn-->", isLoggedIn);
 
   useEffect(() => {
     const socket = io(BaseUrl);
@@ -112,7 +112,7 @@ const Chat = ({ selectedChat }) => {
           },
         }
       );
-      console.log("res-data--", response.data);
+      // console.log("res-data--", response.data);
       if (response.data) {
         setMessages(response.data.data);
       }
@@ -135,7 +135,7 @@ const Chat = ({ selectedChat }) => {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       });
-      console.log("res-data--", response.data);
+      // console.log("res-data--", response.data);
       setToggle(!toggle);
       setMessage("");
     } catch (error) {
