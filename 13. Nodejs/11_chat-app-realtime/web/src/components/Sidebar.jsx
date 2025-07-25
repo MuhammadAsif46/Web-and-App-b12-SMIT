@@ -123,7 +123,7 @@ const Sidebar = ({ selectedChat, onSelectChat }) => {
               key={index}
               onClick={() => onSelectChat(eachuser)}
               className={`sidebar-item ${
-                selectedChat?.id === eachuser.id ? "active" : ""
+                selectedChat?._id === eachuser._id ? "active" : ""
               }`}
             >
               <div className="relative">
@@ -167,7 +167,7 @@ const Sidebar = ({ selectedChat, onSelectChat }) => {
           className="w-full bg-red-500 text-white py-3 rounded-lg font-semibold hover:bg-red-600 hover:cursor-pointer transition-colors flex items-center justify-center space-x-2"
           onClick={logoutHandler}
         >
-          {/* <MessageCircle size={20} /> */}
+           {/* <MessageCircle size={20} /> */}
           <LogOutIcon size={20} />
           <span>Logout</span>
         </button>

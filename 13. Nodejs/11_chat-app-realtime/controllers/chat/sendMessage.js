@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken"
 import joi from "joi";
 import transporter from "../../helpers/index.js";
 import 'dotenv/config'
+import { globalIoObject } from "../../core.js";
 
 
 const chatValidationSchema = joi.object({
@@ -15,7 +16,7 @@ export const sendMessage = async (req, res) => {
     const { messageText, to_id } = req.body;
 
     try {
-    
+
         await chatValidationSchema.validateAsync(req.body);
 
         const sendMessage = await Chat.create({
@@ -25,7 +26,11 @@ export const sendMessage = async (req, res) => {
             to_id: to_id,
             messageText: messageText
         })
-        
+        if(globalIoObject){
+            console.log("emitimg new message-->", sendMessage);
+            globalIoObject.io.emit(to_id, sendMessage)
+        }
+
         return res.status(200).send({ status: 200, message: "Message Send Successfully!", data: sendMessage })
     } catch (error) {
         return res.status(500).send({ status: 500, message: error.message })

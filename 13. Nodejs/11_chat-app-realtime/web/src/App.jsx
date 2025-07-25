@@ -4,11 +4,10 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import UserContext from "./context/userContext";
+import ProfilePage from "./pages/ProfilePage";
 
 
 const App = () => {
-  const token = localStorage.getItem("token");
-
   // const [user, setUser] = useState(JSON.parse(token));
   const { isUser, setIsUser, isLoggedIn } = useContext(UserContext);
   // console.log("user--", isUser);
@@ -49,6 +48,10 @@ const App = () => {
       <Route
         path="/"
         element={isUser ? <HomePage /> : <Navigate to="/login" />}
+      />
+      <Route
+        path="/profile"
+        element={isUser ? <ProfilePage /> : <Navigate to="/login" />}
       />
     </Routes>
   );

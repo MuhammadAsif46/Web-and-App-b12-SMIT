@@ -14,8 +14,8 @@ export const loginUser = async (req, res) => {
 
         // await userValidationSchema.validateAsync(req.body);
 
-        const existedUser = await User.findOne({ email })
-        // const existedUser = await User.findOne({ email }).then(res => res.toObject())
+        // const existedUser = await User.findOne({ email })
+        const existedUser = await User.findOne({ email }).then(res => res.toObject())
 
 
         if (!existedUser) {

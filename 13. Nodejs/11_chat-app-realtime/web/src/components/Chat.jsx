@@ -14,49 +14,48 @@ import profileImage from "../assets/profile.png"
 import { BaseUrl } from '../constants'
 import UserContext from '../context/userContext'
 import axios from 'axios'
-
+import moment from 'moment'
+import io from 'socket.io-client';
 
 const Chat = ({ selectedChat }) => {
   const [message, setMessage] = useState('')
   const { isLoggedIn, isUser } = useContext(UserContext)
-  // console.log("asif-->", isUser);
-  
+
 
   const [isTyping, setIsTyping] = useState(false)
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      text: 'Hey! How are you doing?',
-      sender: 'received',
-      time: '10:30 AM'
-    },
-    {
-      id: 2,
-      text: 'I\'m doing great! Thanks for asking. How about you?',
-      sender: 'sent',
-      time: '10:32 AM'
-    },
-    {
-      id: 3,
-      text: 'Pretty good! Just working on some projects.',
-      sender: 'received',
-      time: '10:33 AM'
-    },
-    {
-      id: 4,
-      text: 'That sounds interesting! What kind of projects?',
-      sender: 'sent',
-      time: '10:35 AM'
-    },
-    {
-      id: 5,
-      text: 'Mostly web development stuff. Building a WhatsApp clone actually! 😄',
-      sender: 'received',
-      time: '10:36 AM'
-    }
-  ])
 
   // Simulate typing indicator
+
+  const [messages, setMessages] = useState([])
+  const [toggle, setToggle] = useState(false)
+
+
+  useEffect(() => {
+
+    // const socket = io("https://myap_name.herokuapp.com"); // to connect hosted server on heroku
+    const socket = io(BaseUrl); // to connect with locally running Socker.io server
+
+    socket.on("connect", function () {
+      console.log("connected");
+    });
+
+    socket.on("disconnect", function (message) {
+      console.log("Socket disconnected from server: ", message);
+    });
+
+    socket.on(isLoggedIn?._id, (e) => {
+      console.log("a new message for you -->", e);
+      setMessages((prev) => {
+        return [...prev, e]
+      })
+    });
+
+    return () => {
+      socket.close();
+    };
+
+  }, [])
+
   useEffect(() => {
     if (selectedChat) {
       const timer = setTimeout(() => {
@@ -65,7 +64,31 @@ const Chat = ({ selectedChat }) => {
       }, 1000)
       return () => clearTimeout(timer)
     }
-  }, [selectedChat])
+  }, [selectedChat,])
+
+  const getMessages = async () => {
+    try {
+      const response = await axios.get(`${BaseUrl}/api/v1/messages/${selectedChat._id}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`
+        }
+      })
+      if (response) {
+        console.log("res-data--", response.data);
+        setMessages(response.data.data)
+      }
+    } catch (error) {
+      console.log(error.code);
+    }
+  }
+
+  useEffect(() => {
+    if (selectedChat) {
+      getMessages()
+    }
+  }, [selectedChat, toggle])
+
+
 
   const handleSendMessage = async () => {
     // if (message.trim()) {
@@ -106,6 +129,7 @@ const Chat = ({ selectedChat }) => {
         }
       });
       console.log("res-data--", response.data);
+      setToggle(!toggle)
       setMessage('')
       // if (response) {
       //   localStorage.setItem("token", JSON.stringify(response.data.token))
@@ -184,12 +208,12 @@ const Chat = ({ selectedChat }) => {
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((msg) => (
           <div
-            key={msg.id}
-            className={`flex message-enter ${msg.sender === 'sent' ? 'justify-end' : 'justify-start'}`}
+            key={msg._id}
+            className={`flex message-enter ${msg.from_id === isLoggedIn?._id ? 'justify-end' : 'justify-start'}`}
           >
-            <div className={`chat-bubble ${msg.sender}`} style={{ maxWidth: 'max(20rem, 50%)' }}>
-              <p className="text-sm">{msg.text}</p>
-              <p className="text-xs text-gray-500 mt-1">{msg.time}</p>
+            <div className={`chat-bubble ${msg.from_id === isLoggedIn?._id ? 'sent' : 'received'}`} style={{ maxWidth: 'max(20rem, 50%)' }}>
+              <p className="text-sm">{msg.messageText}</p>
+              <p className="text-xs text-gray-500 mt-1">{moment(msg.created).fromNow()}</p>
             </div>
           </div>
         ))}

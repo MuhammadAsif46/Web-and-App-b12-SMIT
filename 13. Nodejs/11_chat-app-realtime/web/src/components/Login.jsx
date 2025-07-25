@@ -33,10 +33,6 @@ const Login = () => {
         localStorage.setItem("token", JSON.stringify(response.data.token));
         localStorage.setItem("user", JSON.stringify(response.data.data));
         setIsUser(true);
-        // setIsLoggedIn(response.data.data);
-        // setTimeout(() => {
-        //   navigate("/");
-        // }, 3000);
       }
       setLoader(false);
     } catch (error) {

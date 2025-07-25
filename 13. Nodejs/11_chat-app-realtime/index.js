@@ -5,6 +5,9 @@ import connectDB from "./db/index.js";
 import "dotenv/config";
 import path from "path";
 import { fileURLToPath } from 'url';
+import { createServer } from "http";
+import { Server as socketIo } from 'socket.io';
+import { globalIoObject } from "./core.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,6 +25,33 @@ const PORT = process.env.PORT || 5000;
 
 app.use("/api", router);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port : ${PORT}`);
+
+// THIS IS THE ACTUAL SERVER WHICH IS RUNNING
+const server = createServer(app);
+
+// handing over server access to socket.io
+const io = new socketIo(server, { cors: { origin: "*", methods: "*" } });
+globalIoObject.io = io
+
+io.on("connection", (socket) => {
+  console.log("New client connected with id: ", socket.id);
 });
+
+io.on("disconnect", (message) => {
+  console.log("Client disconnected with id: ", message);
+});
+
+
+// setInterval(() => {
+//   // to emit data to a certain client
+//   io.emit("channel-1", `some data --> ${new Date().toLocaleString()}`);
+// }, 1000);
+
+// app.listen(PORT, () => {
+//   console.log(`http Server is running on port : ${PORT}`);
+// });
+
+server.listen(PORT, () => {
+  console.log(`WS Server is running on port : ${PORT}`);
+});
+
