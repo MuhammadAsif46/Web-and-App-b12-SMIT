@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from "react";
 import {
   Send,
   Paperclip,
@@ -59,10 +59,10 @@ const Chat = ({ selectedChat }) => {
   useEffect(() => {
     if (selectedChat) {
       const timer = setTimeout(() => {
-        setIsTyping(true)
-        setTimeout(() => setIsTyping(false), 2000)
-      }, 1000)
-      return () => clearTimeout(timer)
+        setIsTyping(true);
+        setTimeout(() => setIsTyping(false), 2000);
+      }, 1000);
+      return () => clearTimeout(timer);
     }
   }, [selectedChat,])
 
@@ -91,42 +91,18 @@ const Chat = ({ selectedChat }) => {
 
 
   const handleSendMessage = async () => {
-    // if (message.trim()) {
-    //   const newMessage = {
-    //     id: messages.length + 1,
-    //     text: message,
-    //     sender: 'sent',
-    //     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    //   }
-    //   setMessages([...messages, newMessage])
-    //   setMessage('')
-
-    //   // Simulate received message
-    //   setTimeout(() => {
-    //     const replyMessage = {
-    //       id: messages.length + 2,
-    //       text: 'Thanks for the message! I\'ll get back to you soon.',
-    //       sender: 'received',
-    //       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    //     }
-    //     setMessages(prev => [...prev, replyMessage])
-    //   }, 1000)
-    // }
-    // console.log("isLoggedIn-->", isLoggedIn);
 
     const obj = {
       messageText: message,
       to_id: selectedChat._id,
-    }
-
-    // console.log("obj-->", obj);
+    };
 
 
     try {
       const response = await axios.post(`${BaseUrl}/api/v1/message`, obj, {
         headers: {
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`
-        }
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
       });
       console.log("res-data--", response.data);
       setToggle(!toggle)
@@ -144,14 +120,14 @@ const Chat = ({ selectedChat }) => {
       console.log(error.code);
       // setErrorMessage(error.code);
     }
-  }
+  };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSendMessage()
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
     }
-  }
+  };
 
   if (!selectedChat) {
     return (
@@ -160,11 +136,13 @@ const Chat = ({ selectedChat }) => {
           <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
             <span className="text-white text-2xl font-bold">W</span>
           </div>
-          <h2 className="text-2xl font-semibold text-gray-700 mb-2">Welcome to WhatsApp</h2>
+          <h2 className="text-2xl font-semibold text-gray-700 mb-2">
+            Welcome to WhatsApp
+          </h2>
           <p className="text-gray-500">Select a chat to start messaging</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -175,7 +153,6 @@ const Chat = ({ selectedChat }) => {
           <div className="flex items-center space-x-3">
             <div className="relative">
               <img
-
                 src={selectedChat.avatar ? selectedChat.avatar : profileImage}
                 alt={selectedChat.name}
                 className="w-10 h-10 rounded-full"
@@ -183,7 +160,9 @@ const Chat = ({ selectedChat }) => {
               <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white rounded-full online-indicator"></div>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">{selectedChat.username}</h3>
+              <h3 className="font-semibold text-gray-900">
+                {selectedChat.username}
+              </h3>
               <p className="text-sm text-green-500">online</p>
             </div>
           </div>
@@ -266,7 +245,7 @@ const Chat = ({ selectedChat }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Chat 
+export default Chat;

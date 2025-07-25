@@ -45,6 +45,10 @@ const Sidebar = ({ selectedChat, onSelectChat }) => {
     setIsUser(false);
   };
 
+  const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase();
+  };
+
   return (
     <div className="w-80 bg-white border-r border-gray-200 flex flex-col h-full">
       {/* Header */}
@@ -52,7 +56,7 @@ const Sidebar = ({ selectedChat, onSelectChat }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-              <span className="text-green-600 font-semibold">W</span>
+              <span className="text-green-600 font-semibold">{capitalizeFirstLetter(isLoggedIn?.username)}</span>
             </div>
             <span className="font-semibold text-lg">WhatsApp</span>
           </div>
@@ -71,6 +75,7 @@ const Sidebar = ({ selectedChat, onSelectChat }) => {
             </button>
           </div>
         </div>
+        
       </div>
 
       {/* Search Bar */}
@@ -115,14 +120,14 @@ const Sidebar = ({ selectedChat, onSelectChat }) => {
       </div>
 
       {/* Chat List */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto border-t border-gray-200">
         {users.map((eachuser, index) => {
           if(eachuser?._id === isLoggedIn?._id) return null; // Skip the logged-in user
           return (
             <div
               key={index}
               onClick={() => onSelectChat(eachuser)}
-              className={`sidebar-item ${
+              className={`sidebar-item my-1 first:mt-0 ${
                 selectedChat?._id === eachuser._id ? "active" : ""
               }`}
             >

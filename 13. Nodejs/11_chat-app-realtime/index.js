@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, "./web/dist")))
+app.use(express.static(path.join(__dirname, "./web/dist")));
 
 connectDB();
 
@@ -24,7 +24,6 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 app.use("/api", router);
-
 
 // THIS IS THE ACTUAL SERVER WHICH IS RUNNING
 const server = createServer(app);
